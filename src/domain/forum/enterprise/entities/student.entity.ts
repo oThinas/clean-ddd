@@ -6,7 +6,7 @@ interface StudentProps {
 }
 
 export class Student extends Entity<StudentProps> {
-  static create(props: StudentProps, id?: UniqueEntityId) {
+  static create(props: StudentProps, id?: UniqueEntityId): Student {
     return new Student(props, id);
   }
 }

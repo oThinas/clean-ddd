@@ -5,7 +5,7 @@ export class Slug {
     this.value = value;
   }
 
-  static create(value: string) {
+  static create(value: string): Slug {
     return new Slug(value);
   }
 
@@ -16,7 +16,7 @@ export class Slug {
    * @example
    * "Hello World!" => "hello-world"
    */
-  static createFromText(text: string) {
+  static createFromText(text: string): Slug {
     const slug = text
       .normalize('NFKD')
       .toLowerCase()

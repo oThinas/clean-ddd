@@ -9,7 +9,7 @@ export class Entity<Props> {
     this.props = props;
   }
 
-  get id() {
+  get id(): UniqueEntityId {
     return this._id;
   }
 }
