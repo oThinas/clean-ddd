@@ -1,6 +1,6 @@
-import type { Question } from '../../enterprise/entities/question.entity';
-import type { AnswersRepository } from '../repositories/answers.repository';
-import type { QuestionsRepository } from '../repositories/questions.repository';
+import type { AnswersRepository } from '@repositories/answers.repository';
+import type { QuestionsRepository } from '@repositories/questions.repository';
+import type { Question } from '@entities/question.entity';
 
 interface ChooseQuestionBestAnswerUseCaseRequest {
   authorId: string;

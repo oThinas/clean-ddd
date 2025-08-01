@@ -1,8 +1,8 @@
-import { UniqueEntityId } from '@/core/entities/unique-entity-id.entity';
-import { makeQuestion } from 'test/factories/make-question';
-import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions.repository';
+import { UniqueEntityId } from '@core/entities/unique-entity-id.entity';
+import { DeleteQuestionUseCase } from '@use-cases/delete-question.use-case';
+import { makeQuestion } from '@factories/make-question';
+import { InMemoryQuestionsRepository } from '@test-repositories/in-memory-questions.repository';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { DeleteQuestionUseCase } from './delete-question.use-case';
 
 let questionsRepository: InMemoryQuestionsRepository;
 let sut: DeleteQuestionUseCase;

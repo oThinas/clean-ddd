@@ -1,8 +1,8 @@
-import { UniqueEntityId } from '@/core/entities/unique-entity-id.entity';
-import { makeAnswer } from 'test/factories/make-answer';
-import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository';
+import { UniqueEntityId } from '@core/entities/unique-entity-id.entity';
+import { FetchQuestionAnswersUseCase } from '@use-cases/fetch-question-answers.use-case';
+import { makeAnswer } from '@factories/make-answer';
+import { InMemoryAnswersRepository } from '@test-repositories/in-memory-answers-repository';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { FetchQuestionAnswersUseCase } from './fetch-question-answers.use-case';
 
 let answersRepository: InMemoryAnswersRepository;
 let sut: FetchQuestionAnswersUseCase;

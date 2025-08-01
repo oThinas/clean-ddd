@@ -1,5 +1,5 @@
-import type { Answer } from '../../enterprise/entities/answer.entity';
-import type { AnswersRepository } from '../repositories/answers.repository';
+import type { AnswersRepository } from '@repositories/answers.repository';
+import type { Answer } from '@entities/answer.entity';
 
 interface FetchQuestionAnswersUseCaseRequest {
   questionId: string;

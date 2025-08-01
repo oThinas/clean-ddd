@@ -1,9 +1,9 @@
-import { makeAnswer } from 'test/factories/make-answer';
-import { makeQuestion } from 'test/factories/make-question';
-import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository';
-import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions.repository';
+import { ChooseQuestionBestAnswerUseCase } from '@use-cases/choose-question-best-answer.use-case';
+import { makeAnswer } from '@factories/make-answer';
+import { makeQuestion } from '@factories/make-question';
+import { InMemoryAnswersRepository } from '@test-repositories/in-memory-answers-repository';
+import { InMemoryQuestionsRepository } from '@test-repositories/in-memory-questions.repository';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { ChooseQuestionBestAnswerUseCase } from './choose-question-best-answer.use-case';
 
 let questionsRepository: InMemoryQuestionsRepository;
 let answersRepository: InMemoryAnswersRepository;

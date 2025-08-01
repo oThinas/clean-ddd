@@ -1,6 +1,6 @@
-import { UniqueEntityId } from '@/core/entities/unique-entity-id.entity';
-import { Question, type QuestionProps } from '@/domain/forum/enterprise/entities/question.entity';
-import { Slug } from '@/domain/forum/enterprise/entities/value-objects/slug';
+import { UniqueEntityId } from '@core/entities/unique-entity-id.entity';
+import { Question, type QuestionProps } from '@entities/question.entity';
+import { Slug } from '@value-objects/slug';
 import { faker } from '@faker-js/faker';
 
 export function makeQuestion(override?: Partial<QuestionProps>, id?: UniqueEntityId): Question {

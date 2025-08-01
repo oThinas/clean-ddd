@@ -1,5 +1,5 @@
-import type { Question } from '../../enterprise/entities/question.entity';
-import type { QuestionsRepository } from '../repositories/questions.repository';
+import type { QuestionsRepository } from '@repositories/questions.repository';
+import type { Question } from '@entities/question.entity';
 
 interface FetchRecentQuestionsUseCaseRequest {
   page: number;

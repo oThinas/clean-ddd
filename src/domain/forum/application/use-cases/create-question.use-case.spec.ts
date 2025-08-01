@@ -1,5 +1,5 @@
-import { CreateQuestionUseCase } from '@/domain/forum/application/use-cases/create-question.use-case';
-import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions.repository';
+import { CreateQuestionUseCase } from '@use-cases/create-question.use-case';
+import { InMemoryQuestionsRepository } from '@test-repositories/in-memory-questions.repository';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 let questionsRepository: InMemoryQuestionsRepository;

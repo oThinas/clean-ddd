@@ -1,4 +1,4 @@
-import type { AnswersRepository } from '../repositories/answers.repository';
+import type { AnswersRepository } from '@repositories/answers.repository';
 
 interface EditAnswerUseCaseRequest {
   authorId: string;
