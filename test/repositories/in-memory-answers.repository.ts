@@ -1,6 +1,6 @@
 import type { PaginationParams } from '@core/repositories/pagination-params.repository';
-import type { AnswersRepository } from '@repositories/answers.repository';
 import type { Answer } from '@entities/answer.entity';
+import type { AnswersRepository } from '@repositories/answers.repository';
 
 export class InMemoryAnswersRepository implements AnswersRepository {
   public items: Answer[] = [];
@@ -11,11 +11,7 @@ export class InMemoryAnswersRepository implements AnswersRepository {
 
   async findById(id: string): Promise<Answer | null> {
     const answer = this.items.find((item) => item.id.toString() === id);
-    if (!answer) {
-      return null;
-    }
-
-    return answer;
+    return answer ?? null;
   }
 
   async findManyByQuestionId(questionId: string, { page }: PaginationParams): Promise<Answer[]> {

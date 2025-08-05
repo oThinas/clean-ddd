@@ -1,4 +1,4 @@
-import { InMemoryAnswersRepository } from '@test-repositories/in-memory-answers-repository';
+import { InMemoryAnswersRepository } from '@test-repositories/in-memory-answers.repository';
 import { AnswerQuestionUseCase } from '@use-cases/answer-question.use-case';
 import { beforeEach, describe, expect, it } from 'vitest';
 

@@ -1,6 +1,6 @@
 import type { PaginationParams } from '@core/repositories/pagination-params.repository';
-import type { QuestionsRepository } from '@repositories/questions.repository';
 import type { Question } from '@entities/question.entity';
+import type { QuestionsRepository } from '@repositories/questions.repository';
 
 export class InMemoryQuestionsRepository implements QuestionsRepository {
   public items: Question[] = [];
@@ -11,20 +11,12 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
 
   async findBySlug(slug: string): Promise<Question | null> {
     const question = this.items.find((item) => item.slug.value === slug);
-    if (!question) {
-      return null;
-    }
-
-    return question;
+    return question ?? null;
   }
 
   async findById(id: string): Promise<Question | null> {
     const question = this.items.find((item) => item.id.toString() === id);
-    if (!question) {
-      return null;
-    }
-
-    return question;
+    return question ?? null;
   }
 
   async findManyRecent({ page }: PaginationParams): Promise<Question[]> {
