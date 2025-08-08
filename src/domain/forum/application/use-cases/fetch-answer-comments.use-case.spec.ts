@@ -1,18 +1,21 @@
 import { makeAnswer } from '@factories/make-answer';
 import { makeAnswerComment } from '@factories/make-answer-comment';
+import { InMemoryAnswerAttachmentsRepository } from '@test-repositories/in-memory-answer-attachments.repository';
 import { InMemoryAnswerCommentsRepository } from '@test-repositories/in-memory-answer-comments.repository';
 import { InMemoryAnswersRepository } from '@test-repositories/in-memory-answers.repository';
+import { FetchAnswerCommentsUseCase } from '@use-cases/fetch-answer-comments.use-case';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { FetchAnswerCommentsUseCase } from './fetch-answer-comments.use-case';
 
 let answerCommentsRepository: InMemoryAnswerCommentsRepository;
 let answersRepository: InMemoryAnswersRepository;
+let answerAttachmentsRepository: InMemoryAnswerAttachmentsRepository;
 let sut: FetchAnswerCommentsUseCase;
 
 describe('Fetch Answer Comments Use Case', () => {
   beforeEach(() => {
     answerCommentsRepository = new InMemoryAnswerCommentsRepository();
-    answersRepository = new InMemoryAnswersRepository();
+    answerAttachmentsRepository = new InMemoryAnswerAttachmentsRepository();
+    answersRepository = new InMemoryAnswersRepository(answerAttachmentsRepository);
     sut = new FetchAnswerCommentsUseCase(answerCommentsRepository);
   });
 

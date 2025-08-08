@@ -1,15 +1,18 @@
 import { makeQuestion } from '@factories/make-question';
+import { InMemoryQuestionAttachmentsRepository } from '@test-repositories/in-memory-question-attachments.repository';
 import { InMemoryQuestionsRepository } from '@test-repositories/in-memory-questions.repository';
 import { GetQuestionBySlugUseCase } from '@use-cases/get-question-by-slug.use-case';
 import { Slug } from '@value-objects/slug';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 let questionsRepository: InMemoryQuestionsRepository;
+let questionAttachmentsRepository: InMemoryQuestionAttachmentsRepository;
 let sut: GetQuestionBySlugUseCase;
 
-describe('Get Question By Slug', () => {
+describe('Get Question By Slug Use Case', () => {
   beforeEach(() => {
-    questionsRepository = new InMemoryQuestionsRepository();
+    questionAttachmentsRepository = new InMemoryQuestionAttachmentsRepository();
+    questionsRepository = new InMemoryQuestionsRepository(questionAttachmentsRepository);
     sut = new GetQuestionBySlugUseCase(questionsRepository);
   });
 
@@ -19,9 +22,10 @@ describe('Get Question By Slug', () => {
     const result = await sut.execute({ slug: 'new-question' });
 
     expect(result.isSuccess()).toBe(true);
-
-    if (result.isSuccess()) {
-      expect(result.value.question.id).toEqual(newQuestion.id);
-    }
+    expect(result.value).toMatchObject({
+      question: expect.objectContaining({
+        title: newQuestion.title,
+      }),
+    });
   });
 });

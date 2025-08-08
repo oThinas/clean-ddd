@@ -1,16 +1,19 @@
 import { makeAnswer } from '@factories/make-answer';
+import { InMemoryAnswerAttachmentsRepository } from '@test-repositories/in-memory-answer-attachments.repository';
 import { InMemoryAnswerCommentsRepository } from '@test-repositories/in-memory-answer-comments.repository';
 import { InMemoryAnswersRepository } from '@test-repositories/in-memory-answers.repository';
+import { CommentOnAnswerUseCase } from '@use-cases/comment-on-answer.use-case';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { CommentOnAnswerUseCase } from './comment-on-answer.use-case';
 
 let answersRepository: InMemoryAnswersRepository;
 let answerCommentsRepository: InMemoryAnswerCommentsRepository;
+let answerAttachmentsRepository: InMemoryAnswerAttachmentsRepository;
 let sut: CommentOnAnswerUseCase;
 
 describe('Comment on Answer Use Case', () => {
   beforeEach(() => {
-    answersRepository = new InMemoryAnswersRepository();
+    answerAttachmentsRepository = new InMemoryAnswerAttachmentsRepository();
+    answersRepository = new InMemoryAnswersRepository(answerAttachmentsRepository);
     answerCommentsRepository = new InMemoryAnswerCommentsRepository();
     sut = new CommentOnAnswerUseCase(answersRepository, answerCommentsRepository);
   });

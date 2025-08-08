@@ -1,5 +1,7 @@
 import { type Either, success } from '@core/either';
 import { UniqueEntityId } from '@core/entities/unique-entity-id.entity';
+import { QuestionAttachmentList } from '@entities/question-attachment-list.entity';
+import { QuestionAttachment } from '@entities/question-attachment.entity';
 import { Question } from '@entities/question.entity';
 import type { QuestionsRepository } from '@repositories/questions.repository';
 
@@ -7,6 +9,7 @@ interface CreateQuestionUseCaseRequest {
   authorId: string;
   title: string;
   content: string;
+  attachmentsIds: string[];
 }
 
 type CreateQuestionUseCaseResponse = Either<null, { question: Question }>;
@@ -14,8 +17,21 @@ type CreateQuestionUseCaseResponse = Either<null, { question: Question }>;
 export class CreateQuestionUseCase {
   constructor(private readonly questionsRepository: QuestionsRepository) {}
 
-  async execute({ authorId, content, title }: CreateQuestionUseCaseRequest): Promise<CreateQuestionUseCaseResponse> {
+  async execute({
+    authorId,
+    content,
+    title,
+    attachmentsIds,
+  }: CreateQuestionUseCaseRequest): Promise<CreateQuestionUseCaseResponse> {
     const question = Question.create({ title, content, authorId: new UniqueEntityId(authorId) });
+    const questionAttachments = attachmentsIds.map((attachmentId) =>
+      QuestionAttachment.create({
+        attachmentId: new UniqueEntityId(attachmentId),
+        questionId: question.id,
+      }),
+    );
+    question.attachments = new QuestionAttachmentList(questionAttachments);
+
     await this.questionsRepository.create(question);
     return success({ question });
   }

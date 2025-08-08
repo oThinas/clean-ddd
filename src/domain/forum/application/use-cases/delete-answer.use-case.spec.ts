@@ -1,16 +1,20 @@
 import { UniqueEntityId } from '@core/entities/unique-entity-id.entity';
 import { makeAnswer } from '@factories/make-answer';
+import { makeAnswerAttachment } from '@factories/make-answer-attachment';
+import { InMemoryAnswerAttachmentsRepository } from '@test-repositories/in-memory-answer-attachments.repository';
 import { InMemoryAnswersRepository } from '@test-repositories/in-memory-answers.repository';
 import { DeleteAnswerUseCase } from '@use-cases/delete-answer.use-case';
 import { NotAllowedError } from '@use-cases/errors/not-allowed.error';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 let answersRepository: InMemoryAnswersRepository;
+let answerAttachmentsRepository: InMemoryAnswerAttachmentsRepository;
 let sut: DeleteAnswerUseCase;
 
-describe('Delete Answer', () => {
+describe('Delete Answer Use Case', () => {
   beforeEach(() => {
-    answersRepository = new InMemoryAnswersRepository();
+    answerAttachmentsRepository = new InMemoryAnswerAttachmentsRepository();
+    answersRepository = new InMemoryAnswersRepository(answerAttachmentsRepository);
     sut = new DeleteAnswerUseCase(answersRepository);
   });
 
@@ -20,9 +24,14 @@ describe('Delete Answer', () => {
 
     const newAnswer = makeAnswer({ authorId: new UniqueEntityId(authorId) }, new UniqueEntityId(answerId));
     await answersRepository.create(newAnswer);
+    answerAttachmentsRepository.items.push(
+      makeAnswerAttachment({ answerId: newAnswer.id, attachmentId: new UniqueEntityId('1') }),
+      makeAnswerAttachment({ answerId: newAnswer.id, attachmentId: new UniqueEntityId('2') }),
+    );
     await sut.execute({ authorId, answerId });
 
     expect(answersRepository.items).toHaveLength(0);
+    expect(answerAttachmentsRepository.items).toHaveLength(0);
   });
 
   it('should not be able to delete an answer with wrong author', async () => {

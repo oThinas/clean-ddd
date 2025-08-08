@@ -1,18 +1,21 @@
 import { makeQuestion } from '@factories/make-question';
 import { makeQuestionComment } from '@factories/make-question-comment';
+import { InMemoryQuestionAttachmentsRepository } from '@test-repositories/in-memory-question-attachments.repository';
 import { InMemoryQuestionCommentsRepository } from '@test-repositories/in-memory-question-comments.repository';
 import { InMemoryQuestionsRepository } from '@test-repositories/in-memory-questions.repository';
+import { FetchQuestionCommentsUseCase } from '@use-cases/fetch-question-comments.use-case';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { FetchQuestionCommentsUseCase } from './fetch-question-comments.use-case';
 
 let questionCommentsRepository: InMemoryQuestionCommentsRepository;
 let questionsRepository: InMemoryQuestionsRepository;
+let questionAttachmentsRepository: InMemoryQuestionAttachmentsRepository;
 let sut: FetchQuestionCommentsUseCase;
 
 describe('Fetch Question Comments Use Case', () => {
   beforeEach(() => {
     questionCommentsRepository = new InMemoryQuestionCommentsRepository();
-    questionsRepository = new InMemoryQuestionsRepository();
+    questionAttachmentsRepository = new InMemoryQuestionAttachmentsRepository();
+    questionsRepository = new InMemoryQuestionsRepository(questionAttachmentsRepository);
     sut = new FetchQuestionCommentsUseCase(questionCommentsRepository);
   });
 

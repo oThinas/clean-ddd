@@ -1,9 +1,12 @@
 import type { PaginationParams } from '@core/repositories/pagination-params.repository';
 import type { Question } from '@entities/question.entity';
 import type { QuestionsRepository } from '@repositories/questions.repository';
+import type { InMemoryQuestionAttachmentsRepository } from '@test-repositories/in-memory-question-attachments.repository';
 
 export class InMemoryQuestionsRepository implements QuestionsRepository {
   public items: Question[] = [];
+
+  constructor(private readonly questionAttachmentsRepository: InMemoryQuestionAttachmentsRepository) {}
 
   async create(question: Question): Promise<void> {
     this.items.push(question);
@@ -30,6 +33,8 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
   async delete(question: Question): Promise<void> {
     const questionIndex = this.items.findIndex((item) => item.id.toString() === question.id.toString());
     this.items.splice(questionIndex, 1);
+
+    await this.questionAttachmentsRepository.deleteManyByQuestionId(question.id.toString());
   }
 
   async save(question: Question): Promise<void> {
