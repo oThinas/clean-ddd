@@ -3,13 +3,14 @@ import { makeQuestion } from '@factories/make-question';
 import { InMemoryAnswersRepository } from '@test-repositories/in-memory-answers.repository';
 import { InMemoryQuestionsRepository } from '@test-repositories/in-memory-questions.repository';
 import { ChooseQuestionBestAnswerUseCase } from '@use-cases/choose-question-best-answer.use-case';
+import { NotAllowedError } from '@use-cases/errors/not-allowed.error';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 let questionsRepository: InMemoryQuestionsRepository;
 let answersRepository: InMemoryAnswersRepository;
 let sut: ChooseQuestionBestAnswerUseCase;
 
-describe('Choose Question Best Answer', () => {
+describe('Choose Question Best Answer Use Case', () => {
   beforeEach(() => {
     questionsRepository = new InMemoryQuestionsRepository();
     answersRepository = new InMemoryAnswersRepository();
@@ -38,11 +39,12 @@ describe('Choose Question Best Answer', () => {
     await questionsRepository.create(question);
     await answersRepository.create(answer);
 
-    await expect(
-      sut.execute({
-        answerId: answer.id.toString(),
-        authorId: 'author-2',
-      }),
-    ).rejects.toThrow(new Error('Question not found'));
+    const result = await sut.execute({
+      answerId: answer.id.toString(),
+      authorId: 'author-2',
+    });
+
+    expect(result.isFailure()).toBe(true);
+    expect(result.value).toBeInstanceOf(NotAllowedError);
   });
 });

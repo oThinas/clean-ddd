@@ -1,6 +1,7 @@
 import { makeAnswerComment } from '@factories/make-answer-comment';
 import { InMemoryAnswerCommentsRepository } from '@test-repositories/in-memory-answer-comments.repository';
 import { DeleteAnswerCommentUseCase } from '@use-cases/delete-answer-comment.use-case';
+import { NotAllowedError } from '@use-cases/errors/not-allowed.error';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 let answerCommentsRepository: InMemoryAnswerCommentsRepository;
@@ -28,11 +29,12 @@ describe('Delete Answer Comment Use Case', () => {
     const answerComment = makeAnswerComment();
     await answerCommentsRepository.create(answerComment);
 
-    await expect(
-      sut.execute({
-        authorId: 'another-user-id',
-        answerCommentId: answerComment.id.toString(),
-      }),
-    ).rejects.toThrow(new Error('Answer comment not found'));
+    const result = await sut.execute({
+      authorId: 'another-user-id',
+      answerCommentId: answerComment.id.toString(),
+    });
+
+    expect(result.isFailure()).toBe(true);
+    expect(result.value).toBeInstanceOf(NotAllowedError);
   });
 });

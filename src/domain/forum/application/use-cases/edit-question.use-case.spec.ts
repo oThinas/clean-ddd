@@ -1,7 +1,8 @@
 import { UniqueEntityId } from '@core/entities/unique-entity-id.entity';
-import { EditQuestionUseCase } from '@use-cases/edit-question.use-case';
 import { makeQuestion } from '@factories/make-question';
 import { InMemoryQuestionsRepository } from '@test-repositories/in-memory-questions.repository';
+import { EditQuestionUseCase } from '@use-cases/edit-question.use-case';
+import { NotAllowedError } from '@use-cases/errors/not-allowed.error';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 let questionsRepository: InMemoryQuestionsRepository;
@@ -39,13 +40,14 @@ describe('Edit Question', () => {
     const newQuestion = makeQuestion({ authorId: new UniqueEntityId(authorId) }, new UniqueEntityId(questionId));
     await questionsRepository.create(newQuestion);
 
-    await expect(
-      sut.execute({
-        questionId,
-        authorId: 'author-2',
-        title: 'New title',
-        content: 'New content',
-      }),
-    ).rejects.toThrow(new Error('Question not found'));
+    const result = await sut.execute({
+      questionId,
+      authorId: 'author-2',
+      title: 'New title',
+      content: 'New content',
+    });
+
+    expect(result.isFailure()).toBe(true);
+    expect(result.value).toBeInstanceOf(NotAllowedError);
   });
 });

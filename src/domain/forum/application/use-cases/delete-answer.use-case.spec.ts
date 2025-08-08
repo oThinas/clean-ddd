@@ -2,6 +2,7 @@ import { UniqueEntityId } from '@core/entities/unique-entity-id.entity';
 import { makeAnswer } from '@factories/make-answer';
 import { InMemoryAnswersRepository } from '@test-repositories/in-memory-answers.repository';
 import { DeleteAnswerUseCase } from '@use-cases/delete-answer.use-case';
+import { NotAllowedError } from '@use-cases/errors/not-allowed.error';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 let answersRepository: InMemoryAnswersRepository;
@@ -31,7 +32,9 @@ describe('Delete Answer', () => {
     const newAnswer = makeAnswer({ authorId: new UniqueEntityId(authorId) }, new UniqueEntityId(answerId));
     await answersRepository.create(newAnswer);
 
-    await expect(sut.execute({ authorId: 'author-2', answerId })).rejects.toThrow(new Error('Answer not found'));
-    expect(answersRepository.items).toHaveLength(1);
+    const result = await sut.execute({ authorId: 'author-2', answerId });
+
+    expect(result.isFailure()).toBe(true);
+    expect(result.value).toBeInstanceOf(NotAllowedError);
   });
 });

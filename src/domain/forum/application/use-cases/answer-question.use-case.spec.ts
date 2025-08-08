@@ -12,13 +12,13 @@ describe('Answer Question', () => {
   });
 
   it('should be able to answer a question', async () => {
-    const { answer } = await sut.execute({
+    const result = await sut.execute({
       instructorId: '1',
       questionId: '1',
       content: 'New answer',
     });
 
-    expect(answer.id).toBeTruthy();
-    expect(answersRepository.items[0].id).toEqual(answer.id);
+    expect(result.isSuccess()).toBe(true);
+    expect(answersRepository.items[0].id).toEqual(result.value?.answer.id);
   });
 });

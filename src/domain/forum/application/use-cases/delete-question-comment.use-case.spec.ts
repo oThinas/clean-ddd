@@ -1,6 +1,7 @@
 import { makeQuestionComment } from '@factories/make-question-comment';
 import { InMemoryQuestionCommentsRepository } from '@test-repositories/in-memory-question-comments.repository';
 import { DeleteQuestionCommentUseCase } from '@use-cases/delete-question-comment.use-case';
+import { NotAllowedError } from '@use-cases/errors/not-allowed.error';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 let questionCommentsRepository: InMemoryQuestionCommentsRepository;
@@ -28,11 +29,12 @@ describe('Delete Question Comment Use Case', () => {
     const questionComment = makeQuestionComment();
     await questionCommentsRepository.create(questionComment);
 
-    await expect(
-      sut.execute({
-        authorId: 'another-user-id',
-        questionCommentId: questionComment.id.toString(),
-      }),
-    ).rejects.toThrow(new Error('Question comment not found'));
+    const result = await sut.execute({
+      authorId: 'another-user-id',
+      questionCommentId: questionComment.id.toString(),
+    });
+
+    expect(result.isFailure()).toBe(true);
+    expect(result.value).toBeInstanceOf(NotAllowedError);
   });
 });
