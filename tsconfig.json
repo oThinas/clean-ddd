@@ -31,16 +31,25 @@
       "@core/*": [
         "./src/core/*"
       ],
-      "@entities/*": [
+      "@forum/entities/*": [
         "./src/domain/forum/enterprise/entities/*"
       ],
-      "@repositories/*": [
+      "@notification/entities/*": [
+        "./src/domain/notification/enterprise/entities/*"
+      ],
+      "@forum/repositories/*": [
         "./src/domain/forum/application/repositories/*"
       ],
-      "@use-cases/*": [
+      "@notification/repositories/*": [
+        "./src/domain/notification/application/repositories/*"
+      ],
+      "@forum/use-cases/*": [
         "./src/domain/forum/application/use-cases/*"
       ],
-      "@value-objects/*": [
+      "@notification/use-cases/*": [
+        "./src/domain/notification/application/use-cases/*"
+      ],
+      "@forum/value-objects/*": [
         "./src/domain/forum/enterprise/entities/value-objects/*"
       ],
       "@factories/*": [

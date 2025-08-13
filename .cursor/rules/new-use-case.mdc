@@ -1,0 +1,54 @@
+---
+description: Defines rules for creating new use-cases
+alwaysApply: false
+---
+
+# Use Case Creation Rules
+
+## File Location
+
+- Create a new use case in the `src/domain/[domain_name]/application/use-cases/` folder
+- The use case should be named like `[action_name]-[entity_name].use-case.ts`
+
+## Structure Requirements
+
+- The use case should have an interface that defines the request parameters
+- The use case should have a type that defines the response using `Either<Error, Success>` from [@core/either](mdc:src/core/either.ts)
+- The use case should have a class with a constructor that receives the repository (Dependency Injection)
+- The use case should have an `execute` method that implements the business logic
+- The use case should return `success()` or `failure()` from the Either pattern
+
+## Template Usage
+
+Use the use case template as a starting point: [use-case.template.ts](mdc:docs/templates/use-case.template.ts)
+
+## Example Structure
+
+```typescript
+interface [ActionName][EntityName]UseCaseRequest {
+  // Request parameters
+}
+
+type [ActionName][EntityName]UseCaseResponse = Either<Error, { [entityName]: [EntityName] }>;
+
+export class [ActionName][EntityName]UseCase {
+  constructor(private repository: Repository) {}
+  
+  async execute(request: [ActionName][EntityName]UseCaseRequest): Promise<[ActionName][EntityName]UseCaseResponse> {
+    // Implementation
+  }
+}
+```
+
+## Testing
+
+- Create a test file with the name `[action_name]-[entity_name].use-case.spec.ts`
+- Use the test template as a starting point: [use-case-test.template.ts](mdc:docs/templates/use-case-test.template.ts)
+- Test both success and failure scenarios
+- Use in-memory repositories for testing
+
+## Related Files
+
+- Ensure the entity exists in `src/domain/[domain_name]/enterprise/entities/`
+- Ensure the repository interface exists in `src/domain/[domain_name]/application/repositories/`
+- Create in-memory repository for testing in `test/repositories/`

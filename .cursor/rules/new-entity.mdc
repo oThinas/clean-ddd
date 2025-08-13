@@ -1,0 +1,45 @@
+---
+description: Defines rules for creating new entities
+alwaysApply: false
+---
+
+# Entity Creation Rules
+
+## File Location
+
+- Create a new entity in the `src/domain/[domain_name]/enterprise/entities/` folder
+- The entity should be named like `[entity_name].entity.ts`
+
+## Structure Requirements
+
+- The entity should be a class that extends the `Entity` class from [@core/entities/entity.entity](mdc:src/core/entities/entity.entity.ts)
+- The entity should have an interface that defines the properties of the entity
+- The entity should have getters for all properties
+- The entity should have setters that call the `touch()` method
+- The entity should have a private `touch()` method that updates the `updatedAt` property
+- The entity should have a static `create` method that creates a new instance of the entity
+
+## Template Usage
+
+Use the entity template as a starting point: [entity.template.ts](mdc:docs/templates/entity.template.ts)
+
+## Example Structure
+
+```typescript
+export interface [EntityName]Props {
+  // Define properties here
+}
+
+export class [EntityName] extends Entity<[EntityName]Props> {
+  // Getters
+  // Setters with touch() calls
+  // Private touch() method
+  // Static create() method
+}
+```
+
+## Related Files
+
+- Create corresponding repository interface in `src/domain/[domain_name]/application/repositories/`
+- Create test factory in `test/factories/`
+- Create in-memory repository for testing in `test/repositories/`

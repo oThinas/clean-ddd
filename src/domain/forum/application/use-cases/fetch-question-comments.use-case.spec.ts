@@ -1,9 +1,9 @@
 import { makeQuestion } from '@factories/make-question';
 import { makeQuestionComment } from '@factories/make-question-comment';
+import { FetchQuestionCommentsUseCase } from '@forum/use-cases/fetch-question-comments.use-case';
 import { InMemoryQuestionAttachmentsRepository } from '@test-repositories/in-memory-question-attachments.repository';
 import { InMemoryQuestionCommentsRepository } from '@test-repositories/in-memory-question-comments.repository';
 import { InMemoryQuestionsRepository } from '@test-repositories/in-memory-questions.repository';
-import { FetchQuestionCommentsUseCase } from '@use-cases/fetch-question-comments.use-case';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 let questionCommentsRepository: InMemoryQuestionCommentsRepository;

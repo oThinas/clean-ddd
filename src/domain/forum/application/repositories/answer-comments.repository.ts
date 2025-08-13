@@ -1,5 +1,5 @@
 import type { PaginationParams } from '@core/repositories/pagination-params.repository';
-import type { AnswerComment } from '@entities/answer-comment.entity';
+import type { AnswerComment } from '@forum/entities/answer-comment.entity';
 
 export abstract class AnswerCommentsRepository {
   abstract findById(id: string): Promise<AnswerComment | null>;

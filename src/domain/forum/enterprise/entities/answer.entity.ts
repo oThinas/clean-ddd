@@ -1,7 +1,7 @@
 import { Entity } from '@core/entities/entity.entity';
 import type { UniqueEntityId } from '@core/entities/unique-entity-id.entity';
 import type { Optional } from '@core/types/optional';
-import { AnswerAttachmentList } from '@entities/answer-attachment-list.entity';
+import { AnswerAttachmentList } from '@forum/entities/answer-attachment-list.entity';
 
 export interface AnswerProps {
   authorId: UniqueEntityId;

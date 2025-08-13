@@ -1,0 +1,49 @@
+# Repository Creation Rules
+
+## File Location
+
+- Create repository interface in `src/domain/[domain_name]/application/repositories/`
+- The repository should be named like `[entity_name]s.repository.ts`
+
+## Structure Requirements
+
+- The repository should be an interface (not a class)
+- Include standard CRUD operations: `findById`, `create`, `save`, `delete`
+- Include domain-specific methods like `findBySlug`, `findManyRecent`
+- Use `PaginationParams` from [@core/repositories/pagination-params.repository](mdc:src/core/repositories/pagination-params.repository.ts) for pagination
+- All methods should return `Promise`
+
+## Template Usage
+
+Use the repository template as a starting point: [repository.template.ts](mdc:docs/templates/repository.template.ts)
+
+## Example Structure
+
+```typescript
+export interface [EntityName]sRepository {
+  findById(id: string): Promise<[EntityName] | null>;
+  findBySlug(slug: string): Promise<[EntityName] | null>;
+  findManyRecent(params: PaginationParams): Promise<[EntityName][]>;
+  create([entityName]: [EntityName]): Promise<void>;
+  save([entityName]: [EntityName]): Promise<void>;
+  delete([entityName]: [EntityName]): Promise<void>;
+}
+```
+
+## Testing
+
+- Create in-memory implementation in `test/repositories/`
+- Use the in-memory repository template: [in-memory-repository.template.ts](mdc:docs/templates/in-memory-repository.template.ts)
+- Implement all interface methods
+- Store entities in a public `items` array for testing
+
+## Related Files
+
+- Ensure the entity exists in `src/domain/[domain_name]/enterprise/entities/`
+- Create use cases that depend on this repository
+- Create test factories for entity creation
+description:
+globs:
+alwaysApply: false
+
+---

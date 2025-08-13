@@ -1,6 +1,6 @@
 import { type Either, success } from '@core/either';
-import type { Answer } from '@entities/answer.entity';
-import type { AnswersRepository } from '@repositories/answers.repository';
+import type { Answer } from '@forum/entities/answer.entity';
+import type { AnswersRepository } from '@forum/repositories/answers.repository';
 
 interface FetchQuestionAnswersUseCaseRequest {
   questionId: string;

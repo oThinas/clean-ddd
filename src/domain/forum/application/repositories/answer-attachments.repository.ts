@@ -1,4 +1,4 @@
-import type { AnswerAttachment } from '@entities/answer-attachment.entity';
+import type { AnswerAttachment } from '@forum/entities/answer-attachment.entity';
 
 export abstract class AnswerAttachmentsRepository {
   abstract findManyByAnswerId(answerId: string): Promise<AnswerAttachment[]>;

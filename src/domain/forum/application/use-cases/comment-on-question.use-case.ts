@@ -1,9 +1,9 @@
 import { type Either, failure, success } from '@core/either';
 import { UniqueEntityId } from '@core/entities/unique-entity-id.entity';
-import { QuestionComment } from '@entities/question-comment.entity';
-import type { QuestionCommentsRepository } from '@repositories/question-comments.repository';
-import type { QuestionsRepository } from '@repositories/questions.repository';
-import { ResourceNotFoundError } from '@use-cases/errors/resource-not-found.error';
+import { ResourceNotFoundError } from '@core/errors/resource-not-found.error';
+import { QuestionComment } from '@forum/entities/question-comment.entity';
+import type { QuestionCommentsRepository } from '@forum/repositories/question-comments.repository';
+import type { QuestionsRepository } from '@forum/repositories/questions.repository';
 
 interface CommentOnQuestionUseCaseRequest {
   authorId: string;

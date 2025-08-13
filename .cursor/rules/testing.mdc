@@ -1,0 +1,88 @@
+# Testing Rules
+
+## Test Framework
+
+- Use **Vitest** as the testing framework
+- Use **describe** blocks for test suites
+- Use **it** blocks for individual test cases
+- Use **beforeEach** for test setup
+
+## Test Organization
+
+### Use Case Tests
+
+- Create test file with name `[use-case-name].spec.ts`
+- Use the test template: [use-case-test.template.ts](mdc:docs/templates/use-case-test.template.ts)
+- Test both success and failure scenarios
+- Use descriptive test names that explain the behavior
+
+### Test Structure
+
+```typescript
+describe('[Use Case Name]', () => {
+  beforeEach(() => {
+    // Setup repositories and use case
+  });
+
+  it('should be able to [expected behavior]', async () => {
+    // Arrange
+    // Act
+    // Assert
+  });
+
+  it('should not be able to [invalid behavior]', async () => {
+    // Arrange
+    // Act
+    // Assert
+  });
+});
+```
+
+## Test Factories
+
+- Create factories in `test/factories/`
+- Use the factory template: [test-factory.template.ts](mdc:docs/templates/test-factory.template.ts)
+- Accept override parameters for flexibility
+- Return properly configured entities
+
+## In-Memory Repositories
+
+- Create in `test/repositories/`
+- Use the in-memory repository template: [in-memory-repository.template.ts](mdc:docs/templates/in-memory-repository.template.ts)
+- Implement all repository interface methods
+- Store entities in public `items` array
+- Use for dependency injection in tests
+
+## Testing Patterns
+
+### AAA Pattern
+
+- **Arrange**: Set up test data and dependencies
+- **Act**: Execute the method being tested
+- **Assert**: Verify the expected outcomes
+
+### Error Testing
+
+- Test both `isSuccess()` and `isFailure()` scenarios
+- Verify specific error types when applicable
+- Test edge cases and invalid inputs
+
+### Repository Testing
+
+- Test all CRUD operations
+- Verify data persistence in in-memory storage
+- Test pagination and filtering methods
+
+## Best Practices
+
+- Keep tests focused and isolated
+- Use meaningful variable names
+- Avoid test interdependence
+- Test both happy path and error scenarios
+- Use factories for consistent test data
+- Mock external dependencies appropriately
+description:
+globs:
+alwaysApply: false
+
+---

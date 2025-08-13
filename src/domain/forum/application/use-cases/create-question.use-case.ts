@@ -1,9 +1,9 @@
 import { type Either, success } from '@core/either';
 import { UniqueEntityId } from '@core/entities/unique-entity-id.entity';
-import { QuestionAttachmentList } from '@entities/question-attachment-list.entity';
-import { QuestionAttachment } from '@entities/question-attachment.entity';
-import { Question } from '@entities/question.entity';
-import type { QuestionsRepository } from '@repositories/questions.repository';
+import { QuestionAttachmentList } from '@forum/entities/question-attachment-list.entity';
+import { QuestionAttachment } from '@forum/entities/question-attachment.entity';
+import { Question } from '@forum/entities/question.entity';
+import type { QuestionsRepository } from '@forum/repositories/questions.repository';
 
 interface CreateQuestionUseCaseRequest {
   authorId: string;

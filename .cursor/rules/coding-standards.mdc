@@ -1,0 +1,73 @@
+# Coding Standards & Best Practices
+
+## TypeScript Standards
+
+- **Return Types**: Every function must have an explicit return type
+- **Interfaces**: Use interfaces for object shapes and contracts
+- **Types**: Use type aliases for complex types and unions
+- **Imports**: Use absolute imports with domain aliases
+- **Exports**: Use named exports, avoid default exports
+
+## Code Organization
+
+### Entity Structure
+
+- Extend `Entity` or `AggregateRoot` from core
+- Define props interface with all properties
+- Implement getters for all properties
+- Implement setters that call `touch()` method
+- Include static `create` method for instantiation
+- Use `Optional` type for optional properties
+
+### Use Case Structure
+
+- Define request interface with input parameters
+- Define response type using `Either<Error, Success>`
+- Use constructor dependency injection
+- Implement `execute` method with async/await
+- Return `success()` or `failure()` from Either
+
+### Repository Pattern
+
+- Define interface in application layer
+- Implement in infrastructure layer
+- Use generic types for entities
+- Include pagination support when needed
+
+## Error Handling
+
+- Use `Either` pattern for functional error handling
+- Create specific error classes extending base errors
+- Return `success()` for successful operations
+- Return `failure()` with specific error for failures
+- Never throw exceptions in use cases
+
+## Testing Standards
+
+- Use Vitest for testing framework
+- Create test factories for entity creation
+- Use in-memory repositories for testing
+- Test both success and failure scenarios
+- Use descriptive test names
+- Follow AAA pattern (Arrange, Act, Assert)
+
+## Naming Conventions
+
+- **PascalCase**: Classes, interfaces, types
+- **camelCase**: Variables, functions, methods
+- **kebab-case**: File names
+- **UPPER_SNAKE_CASE**: Constants
+
+## Code Quality
+
+- Use Biome for linting and formatting
+- Follow single responsibility principle
+- Keep functions small and focused
+- Use meaningful variable and function names
+- Add JSDoc comments for complex logic
+- Avoid code duplication
+description:
+globs:
+alwaysApply: false
+
+---

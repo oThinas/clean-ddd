@@ -1,7 +1,7 @@
 import { UniqueEntityId } from '@core/entities/unique-entity-id.entity';
-import { Question, type QuestionProps } from '@entities/question.entity';
-import { Slug } from '@value-objects/slug';
 import { faker } from '@faker-js/faker';
+import { Question, type QuestionProps } from '@forum/entities/question.entity';
+import { Slug } from '@forum/value-objects/slug';
 
 export function makeQuestion(override?: Partial<QuestionProps>, id?: UniqueEntityId): Question {
   const title = faker.lorem.sentence();

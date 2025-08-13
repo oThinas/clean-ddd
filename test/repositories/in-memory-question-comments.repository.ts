@@ -1,6 +1,6 @@
 import type { PaginationParams } from '@core/repositories/pagination-params.repository';
-import type { QuestionComment } from '@entities/question-comment.entity';
-import type { QuestionCommentsRepository } from '@repositories/question-comments.repository';
+import type { QuestionComment } from '@forum/entities/question-comment.entity';
+import type { QuestionCommentsRepository } from '@forum/repositories/question-comments.repository';
 
 export class InMemoryQuestionCommentsRepository implements QuestionCommentsRepository {
   public items: QuestionComment[] = [];

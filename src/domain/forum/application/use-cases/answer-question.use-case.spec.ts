@@ -1,7 +1,7 @@
 import { UniqueEntityId } from '@core/entities/unique-entity-id.entity';
+import { AnswerQuestionUseCase } from '@forum/use-cases/answer-question.use-case';
 import { InMemoryAnswerAttachmentsRepository } from '@test-repositories/in-memory-answer-attachments.repository';
 import { InMemoryAnswersRepository } from '@test-repositories/in-memory-answers.repository';
-import { AnswerQuestionUseCase } from '@use-cases/answer-question.use-case';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 let answersRepository: InMemoryAnswersRepository;

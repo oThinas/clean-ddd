@@ -8,6 +8,20 @@ O domínio é a base do DDD e é a partir dele que os modelos de negócio são c
 
 Além disso, o DDD enfatiza a importância da comunicação clara e constante entre os desenvolvedores e os especialistas do domínio (conhecidos como especialistas do domínio ou domain experts), para que o conhecimento do domínio possa ser compartilhado e incorporado ao processo de desenvolvimento de software.
 
+## Subdomínios
+
+Subdomínios (subdomains) são partes do domínio que são relevantes para um determinado contexto ou problema específico. Eles são usados para dividir o domínio em partes menores e mais focadas, permitindo que o desenvolvedor se concentre em um subconjunto do domínio e construa um modelo de domínio mais claro e focado.
+
+Por exemplo, em um sistema de comércio eletrônico, o domínio pode ser dividido em subdomínios como "pedidos", "pagamentos", "produtos", "clientes", etc. Cada subdomínio pode ter suas próprias entidades, agregados, serviços e eventos, e pode ser tratado de forma independente.
+
+O uso de subdomínios é uma técnica importante para gerenciar a complexidade em sistemas de software baseados em DDD. Ao dividir o domínio em partes menores, é possível criar um modelo de domínio mais claro e focado, com transações e responsabilidades bem definidas para cada parte do domínio.
+
+Eles podem ser do tipo:
+
+- Core: são os subdomínios que são fundamentais para o negócio e que devem ser tratados de forma independente;
+- Supporting: são os subdomínios que são suporte para os subdomínios core;
+- Generic: são os subdomínios que são genéricos e podem ser reutilizados em diferentes contextos;
+
 ## Entidades
 
 As entidades (entities) são objetos de domínio que representam conceitos importantes do negócio. Elas são responsáveis por encapsular o estado e o comportamento relacionado a esses conceitos, e são fundamentais para a modelagem do domínio.

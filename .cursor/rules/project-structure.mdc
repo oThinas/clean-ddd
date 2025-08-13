@@ -1,0 +1,64 @@
+# Clean DDD Project Structure
+
+This project follows Clean Architecture principles with Domain-Driven Design (DDD) patterns.
+
+## Project Organization
+
+### Core Layer (`src/core/`)
+
+- **entities/**: Base entity classes and value objects
+  - [entity.entity.ts](mdc:src/core/entities/entity.entity.ts) - Base Entity class
+  - [aggregate-root.entity.ts](mdc:src/core/entities/aggregate-root.entity.ts) - Base AggregateRoot class
+  - [unique-entity-id.entity.ts](mdc:src/core/entities/unique-entity-id.entity.ts) - Unique identifier
+  - [watched-list.entity.ts](mdc:src/core/entities/watched-list.entity.ts) - Observable list for aggregates
+- **either.ts**: Functional error handling with Either pattern
+- **errors/**: Base error classes
+- **repositories/**: Base repository interfaces and types
+- **types/**: Common TypeScript utility types
+
+### Domain Layer (`src/domain/[domain_name]/`)
+
+Each domain follows this structure:
+
+- **enterprise/entities/**: Domain entities and value objects
+- **application/use-cases/**: Application use cases (business logic)
+
+- **application/repositories/**: Repository interfaces for the domain
+
+### Test Layer (`test/`)
+
+- **factories/**: Test factories for creating entities
+- **repositories/**: In-memory implementations for testing
+
+## Naming Conventions
+
+- **Entities**: `[entity-name].entity.ts`
+
+- **Use Cases**: `[action-name].use-case.ts`
+- **Tests**: `[filename].spec.ts`
+- **Repositories**: `[entity-name].repository.ts`
+- **Value Objects**: `[value-object-name].ts`
+
+## Import Paths
+
+Use absolute imports with domain aliases:
+
+- `@core/` - Core domain
+- `@[domain_name]/` - Specific domain (e.g., `@forum/`, `@notification/`)
+- `@test-repositories/` - Test repositories
+- `@test-factories/` - Test factories
+
+## Architecture Principles
+
+1. **Dependency Inversion**: Dependencies point inward toward the domain
+2. **Single Responsibility**: Each class has one reason to change
+3. **Open/Closed**: Open for extension, closed for modification
+4. **Dependency Injection**: Use constructor injection for dependencies
+
+5. **Functional Error Handling**: Use Either pattern for error handling
+6. **Immutable Entities**: Entities are immutable, use methods to change state
+description:
+globs:
+alwaysApply: false
+
+---

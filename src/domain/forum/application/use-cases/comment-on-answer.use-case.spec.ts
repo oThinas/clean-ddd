@@ -1,8 +1,8 @@
 import { makeAnswer } from '@factories/make-answer';
+import { CommentOnAnswerUseCase } from '@forum/use-cases/comment-on-answer.use-case';
 import { InMemoryAnswerAttachmentsRepository } from '@test-repositories/in-memory-answer-attachments.repository';
 import { InMemoryAnswerCommentsRepository } from '@test-repositories/in-memory-answer-comments.repository';
 import { InMemoryAnswersRepository } from '@test-repositories/in-memory-answers.repository';
-import { CommentOnAnswerUseCase } from '@use-cases/comment-on-answer.use-case';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 let answersRepository: InMemoryAnswersRepository;

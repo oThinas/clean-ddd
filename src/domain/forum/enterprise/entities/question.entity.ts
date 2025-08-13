@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@core/entities/aggregate-root.entity';
 import type { UniqueEntityId } from '@core/entities/unique-entity-id.entity';
 import type { Optional } from '@core/types/optional';
-import { QuestionAttachmentList } from '@entities/question-attachment-list.entity';
-import { Slug } from '@value-objects/slug';
+import { QuestionAttachmentList } from '@forum/entities/question-attachment-list.entity';
+import { Slug } from '@forum/value-objects/slug';
 import dayjs from 'dayjs';
 
 export interface QuestionProps {

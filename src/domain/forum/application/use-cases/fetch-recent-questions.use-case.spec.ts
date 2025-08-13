@@ -1,7 +1,7 @@
 import { makeQuestion } from '@factories/make-question';
+import { FetchRecentQuestionsUseCase } from '@forum/use-cases/fetch-recent-questions.use-case';
 import { InMemoryQuestionAttachmentsRepository } from '@test-repositories/in-memory-question-attachments.repository';
 import { InMemoryQuestionsRepository } from '@test-repositories/in-memory-questions.repository';
-import { FetchRecentQuestionsUseCase } from '@use-cases/fetch-recent-questions.use-case';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 let questionsRepository: InMemoryQuestionsRepository;

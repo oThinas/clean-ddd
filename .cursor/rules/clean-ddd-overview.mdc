@@ -1,0 +1,117 @@
+# Clean DDD Architecture Overview
+
+This project implements Clean Architecture with Domain-Driven Design (DDD) principles.
+
+## Architecture Layers
+
+### 1. Core Layer (`src/core/`)
+
+The innermost layer containing domain-agnostic utilities:
+
+- **Entities**: Base classes for domain entities
+- **Either**: Functional error handling pattern
+- **Errors**: Base error classes
+- **Repositories**: Base repository types
+- **Types**: Common TypeScript utilities
+
+### 2. Domain Layer (`src/domain/[domain_name]/`)
+
+Each domain is self-contained with its own structure:
+
+#### Enterprise Layer (`enterprise/`)
+
+- **Entities**: Domain entities and value objects
+- **Value Objects**: Immutable objects representing domain concepts
+
+#### Application Layer (`application/`)
+
+- **Use Cases**: Business logic implementation
+- **Repositories**: Repository interfaces (contracts)
+
+### 3. Test Layer (`test/`)
+
+- **Factories**: Test data creation
+- **Repositories**: In-memory implementations for testing
+
+## Development Workflow
+
+### Creating New Domain Components
+
+1. **Entity Creation**
+   - Use template: [entity.template.ts](mdc:docs/templates/entity.template.ts)
+   - Follow rules: [new-entity.mdc](mdc:.cursor/rules/new-entity.mdc)
+
+2. **Repository Interface**
+   - Use template: [repository.template.ts](mdc:docs/templates/repository.template.ts)
+   - Follow rules: [new-repository.mdc](mdc:.cursor/rules/new-repository.mdc)
+
+3. **Use Case Implementation**
+   - Use template: [use-case.template.ts](mdc:docs/templates/use-case.template.ts)
+   - Follow rules: [new-use-case.mdc](mdc:.cursor/rules/new-use-case.mdc)
+
+4. **Testing**
+   - Use templates: [use-case-test.template.ts](mdc:docs/templates/use-case-test.template.ts), [test-factory.template.ts](mdc:docs/templates/test-factory.template.ts), [in-memory-repository.template.ts](mdc:docs/templates/in-memory-repository.template.ts)
+   - Follow rules: [testing.mdc](mdc:.cursor/rules/testing.mdc)
+
+## Key Principles
+
+### 1. Dependency Inversion
+
+- Dependencies point inward toward the domain
+- External concerns depend on internal abstractions
+- Use dependency injection for flexibility
+
+### 2. Functional Error Handling
+
+- Use `Either<Error, Success>` pattern
+- Never throw exceptions in use cases
+- Return `success()` or `failure()` consistently
+
+### 3. Immutable Entities
+
+- Entities are immutable by design
+- Use methods to change state
+- Implement `touch()` method for audit trails
+
+### 4. Repository Pattern
+
+- Define interfaces in application layer
+- Implement in infrastructure layer
+- Use for data access abstraction
+
+## File Naming Conventions
+
+- **Entities**: `[entity-name].entity.ts`
+- **Use Cases**: `[action-name]-[entity-name].use-case.ts`
+- **Tests**: `[filename].spec.ts`
+- **Repositories**: `[entity-name]s.repository.ts`
+- **Value Objects**: `[value-object-name].ts`
+
+## Import Paths
+
+Use absolute imports with domain aliases:
+
+- `@core/` - Core domain utilities
+- `@[domain]/` - Specific domain (e.g., `@forum/`, `@notification/`)
+- `@test-repositories/` - Test repository implementations
+- `@test-factories/` - Test data factories
+
+## Best Practices
+
+1. **Single Responsibility**: Each class has one reason to change
+2. **Open/Closed**: Open for extension, closed for modification
+3. **Dependency Injection**: Use constructor injection
+4. **Test-Driven Development**: Write tests first
+5. **Consistent Naming**: Follow established conventions
+6. **Error Handling**: Use functional error handling patterns
+
+## Related Rules
+
+- [project-structure.mdc](mdc:.cursor/rules/project-structure.mdc) - Detailed project structure
+- [coding-standards.mdc](mdc:.cursor/rules/coding-standards.mdc) - Coding standards and best practices
+- [functions.mdc](mdc:.cursor/rules/functions.mdc) - Function return type requirements
+description:
+globs:
+alwaysApply: false
+
+---

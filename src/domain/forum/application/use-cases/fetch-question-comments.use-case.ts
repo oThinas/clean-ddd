@@ -1,6 +1,6 @@
 import { type Either, success } from '@core/either';
-import type { QuestionComment } from '@entities/question-comment.entity';
-import type { QuestionCommentsRepository } from '@repositories/question-comments.repository';
+import type { QuestionComment } from '@forum/entities/question-comment.entity';
+import type { QuestionCommentsRepository } from '@forum/repositories/question-comments.repository';
 
 interface FetchQuestionCommentsUseCaseRequest {
   questionId: string;

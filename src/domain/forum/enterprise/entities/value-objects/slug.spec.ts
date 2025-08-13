@@ -1,4 +1,4 @@
-import { Slug } from '@value-objects/slug';
+import { Slug } from '@forum/value-objects/slug';
 import { describe, expect, it } from 'vitest';
 
 describe('Slug', () => {

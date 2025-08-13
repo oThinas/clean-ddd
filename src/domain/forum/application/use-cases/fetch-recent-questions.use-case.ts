@@ -1,6 +1,6 @@
 import { type Either, success } from '@core/either';
-import type { Question } from '@entities/question.entity';
-import type { QuestionsRepository } from '@repositories/questions.repository';
+import type { Question } from '@forum/entities/question.entity';
+import type { QuestionsRepository } from '@forum/repositories/questions.repository';
 
 interface FetchRecentQuestionsUseCaseRequest {
   page: number;

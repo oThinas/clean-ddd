@@ -1,5 +1,5 @@
-import type { AnswerAttachment } from '@entities/answer-attachment.entity';
-import type { AnswerAttachmentsRepository } from '@repositories/answer-attachments.repository';
+import type { AnswerAttachment } from '@forum/entities/answer-attachment.entity';
+import type { AnswerAttachmentsRepository } from '@forum/repositories/answer-attachments.repository';
 
 export class InMemoryAnswerAttachmentsRepository implements AnswerAttachmentsRepository {
   public items: AnswerAttachment[] = [];

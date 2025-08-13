@@ -1,10 +1,10 @@
 import { UniqueEntityId } from '@core/entities/unique-entity-id.entity';
+import { NotAllowedError } from '@core/errors/not-allowed.error';
 import { makeAnswer } from '@factories/make-answer';
 import { makeAnswerAttachment } from '@factories/make-answer-attachment';
+import { EditAnswerUseCase } from '@forum/use-cases/edit-answer.use-case';
 import { InMemoryAnswerAttachmentsRepository } from '@test-repositories/in-memory-answer-attachments.repository';
 import { InMemoryAnswersRepository } from '@test-repositories/in-memory-answers.repository';
-import { EditAnswerUseCase } from '@use-cases/edit-answer.use-case';
-import { NotAllowedError } from '@use-cases/errors/not-allowed.error';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 let answersRepository: InMemoryAnswersRepository;

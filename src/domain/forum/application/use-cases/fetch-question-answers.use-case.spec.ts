@@ -1,8 +1,8 @@
 import { UniqueEntityId } from '@core/entities/unique-entity-id.entity';
 import { makeAnswer } from '@factories/make-answer';
+import { FetchQuestionAnswersUseCase } from '@forum/use-cases/fetch-question-answers.use-case';
 import { InMemoryAnswerAttachmentsRepository } from '@test-repositories/in-memory-answer-attachments.repository';
 import { InMemoryAnswersRepository } from '@test-repositories/in-memory-answers.repository';
-import { FetchQuestionAnswersUseCase } from '@use-cases/fetch-question-answers.use-case';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 let answersRepository: InMemoryAnswersRepository;

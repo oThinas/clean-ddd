@@ -1,9 +1,9 @@
 import { type Either, success } from '@core/either';
 import { UniqueEntityId } from '@core/entities/unique-entity-id.entity';
-import { AnswerAttachmentList } from '@entities/answer-attachment-list.entity';
-import { AnswerAttachment } from '@entities/answer-attachment.entity';
-import { Answer } from '@entities/answer.entity';
-import type { AnswersRepository } from '@repositories/answers.repository';
+import { AnswerAttachmentList } from '@forum/entities/answer-attachment-list.entity';
+import { AnswerAttachment } from '@forum/entities/answer-attachment.entity';
+import { Answer } from '@forum/entities/answer.entity';
+import type { AnswersRepository } from '@forum/repositories/answers.repository';
 
 interface AnswerQuestionUseCaseRequest {
   instructorId: string;

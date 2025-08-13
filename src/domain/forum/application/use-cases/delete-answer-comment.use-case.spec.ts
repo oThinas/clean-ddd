@@ -1,7 +1,7 @@
+import { NotAllowedError } from '@core/errors/not-allowed.error';
 import { makeAnswerComment } from '@factories/make-answer-comment';
+import { DeleteAnswerCommentUseCase } from '@forum/use-cases/delete-answer-comment.use-case';
 import { InMemoryAnswerCommentsRepository } from '@test-repositories/in-memory-answer-comments.repository';
-import { DeleteAnswerCommentUseCase } from '@use-cases/delete-answer-comment.use-case';
-import { NotAllowedError } from '@use-cases/errors/not-allowed.error';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 let answerCommentsRepository: InMemoryAnswerCommentsRepository;

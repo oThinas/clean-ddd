@@ -1,6 +1,6 @@
 import { type Either, success } from '@core/either';
-import type { AnswerComment } from '@entities/answer-comment.entity';
-import type { AnswerCommentsRepository } from '@repositories/answer-comments.repository';
+import type { AnswerComment } from '@forum/entities/answer-comment.entity';
+import type { AnswerCommentsRepository } from '@forum/repositories/answer-comments.repository';
 
 interface FetchAnswerCommentsUseCaseRequest {
   answerId: string;

@@ -1,8 +1,8 @@
 import { makeQuestion } from '@factories/make-question';
+import { GetQuestionBySlugUseCase } from '@forum/use-cases/get-question-by-slug.use-case';
+import { Slug } from '@forum/value-objects/slug';
 import { InMemoryQuestionAttachmentsRepository } from '@test-repositories/in-memory-question-attachments.repository';
 import { InMemoryQuestionsRepository } from '@test-repositories/in-memory-questions.repository';
-import { GetQuestionBySlugUseCase } from '@use-cases/get-question-by-slug.use-case';
-import { Slug } from '@value-objects/slug';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 let questionsRepository: InMemoryQuestionsRepository;

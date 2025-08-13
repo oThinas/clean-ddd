@@ -1,8 +1,8 @@
 import { type Either, failure, success } from '@core/either';
+import { NotAllowedError } from '@core/errors/not-allowed.error';
+import { ResourceNotFoundError } from '@core/errors/resource-not-found.error';
 import type { EmptyObject } from '@core/types/empty-object';
-import type { QuestionsRepository } from '@repositories/questions.repository';
-import { NotAllowedError } from '@use-cases/errors/not-allowed.error';
-import { ResourceNotFoundError } from '@use-cases/errors/resource-not-found.error';
+import type { QuestionsRepository } from '@forum/repositories/questions.repository';
 
 interface DeleteQuestionUseCaseRequest {
   authorId: string;

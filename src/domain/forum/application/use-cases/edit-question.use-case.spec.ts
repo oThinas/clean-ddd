@@ -1,10 +1,10 @@
 import { UniqueEntityId } from '@core/entities/unique-entity-id.entity';
+import { NotAllowedError } from '@core/errors/not-allowed.error';
 import { makeQuestion } from '@factories/make-question';
 import { makeQuestionAttachment } from '@factories/make-question-attachment';
+import { EditQuestionUseCase } from '@forum/use-cases/edit-question.use-case';
 import { InMemoryQuestionAttachmentsRepository } from '@test-repositories/in-memory-question-attachments.repository';
 import { InMemoryQuestionsRepository } from '@test-repositories/in-memory-questions.repository';
-import { EditQuestionUseCase } from '@use-cases/edit-question.use-case';
-import { NotAllowedError } from '@use-cases/errors/not-allowed.error';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 let questionsRepository: InMemoryQuestionsRepository;

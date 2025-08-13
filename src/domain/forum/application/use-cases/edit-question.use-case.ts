@@ -1,12 +1,12 @@
 import { type Either, failure, success } from '@core/either';
 import { UniqueEntityId } from '@core/entities/unique-entity-id.entity';
+import { NotAllowedError } from '@core/errors/not-allowed.error';
+import { ResourceNotFoundError } from '@core/errors/resource-not-found.error';
 import type { EmptyObject } from '@core/types/empty-object';
-import { QuestionAttachmentList } from '@entities/question-attachment-list.entity';
-import { QuestionAttachment } from '@entities/question-attachment.entity';
-import type { QuestionAttachmentsRepository } from '@repositories/question-attachments.repository';
-import type { QuestionsRepository } from '@repositories/questions.repository';
-import { NotAllowedError } from '@use-cases/errors/not-allowed.error';
-import { ResourceNotFoundError } from '@use-cases/errors/resource-not-found.error';
+import { QuestionAttachmentList } from '@forum/entities/question-attachment-list.entity';
+import { QuestionAttachment } from '@forum/entities/question-attachment.entity';
+import type { QuestionAttachmentsRepository } from '@forum/repositories/question-attachments.repository';
+import type { QuestionsRepository } from '@forum/repositories/questions.repository';
 
 interface EditQuestionUseCaseRequest {
   authorId: string;

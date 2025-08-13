@@ -1,6 +1,6 @@
 import { UniqueEntityId } from '@core/entities/unique-entity-id.entity';
-import { QuestionComment } from '@entities/question-comment.entity';
 import { faker } from '@faker-js/faker';
+import { QuestionComment } from '@forum/entities/question-comment.entity';
 
 export function makeQuestionComment(override?: Partial<QuestionComment>, id?: UniqueEntityId): QuestionComment {
   const content = faker.lorem.sentence();
