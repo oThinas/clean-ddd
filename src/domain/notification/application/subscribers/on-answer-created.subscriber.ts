@@ -1,5 +1,5 @@
 import type { EventHandler } from '@core/events/domain.events';
-import * as DomainEvent from '@core/events/domain.events';
+import * as DomainEvents from '@core/events/domain.events';
 import { AnswerCreatedEvent } from '@forum/events/answer-created.event';
 import type { QuestionsRepository } from '@forum/repositories/questions.repository';
 import type { SendNotificationUseCase } from '@notification/use-cases/send-notification.use-case';
@@ -13,7 +13,7 @@ export class OnAnswerCreatedSubscriber implements EventHandler {
   }
 
   setupSubscriptions(): void {
-    DomainEvent.register(this.sendNewAnswerNotification.bind(this), AnswerCreatedEvent.name);
+    DomainEvents.register(this.sendNewAnswerNotification.bind(this), AnswerCreatedEvent.name);
   }
 
   private async sendNewAnswerNotification({ answer }: AnswerCreatedEvent): Promise<void> {
