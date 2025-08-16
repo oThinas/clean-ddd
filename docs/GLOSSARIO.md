@@ -79,3 +79,46 @@ Um evento de domínio (domain event) é uma notificação assíncrona que indica
 Por exemplo, em um sistema de comércio eletrônico, um evento de domínio pode ser gerado quando uma nova compra é realizada com sucesso. Esse evento pode conter informações como o identificador da compra, o valor total, o endereço de entrega, entre outras informações relevantes para o domínio.
 
 Eventos de domínio são importantes porque permitem que diferentes partes do sistema sejam notificadas e atualizadas quando ocorrem mudanças importantes no domínio. Eles também permitem que o sistema seja projetado de forma mais modular e escalável, pois diferentes partes do sistema podem ser projetadas para reagir a diferentes tipos de eventos, de forma independente.
+
+## Watched Lists
+
+Watched Lists (listas observáveis) são uma técnica para gerenciar coleções de objetos dentro de agregados de forma eficiente e consistente. Elas são implementadas como classes que encapsulam uma lista de objetos e rastreiam as mudanças que ocorrem nessa lista.
+
+Uma Watched List mantém três listas internas:
+- **Items**: a lista atual de objetos
+- **New Items**: objetos que foram adicionados mas ainda não foram persistidos
+- **Removed Items**: objetos que foram removidos mas ainda não foram persistidos
+
+Essa técnica é especialmente útil em agregados que contêm coleções de entidades ou value objects, pois permite que a raiz do agregado saiba exatamente quais mudanças ocorreram e possa aplicar regras de negócio apropriadas antes de persistir as mudanças.
+
+Por exemplo, em um agregado de Pedido, uma Watched List pode ser usada para gerenciar os itens do pedido, permitindo que o sistema saiba quais itens foram adicionados ou removidos sem precisar comparar listas inteiras.
+
+## Publisher
+
+Publisher (publicador) é um componente responsável por publicar eventos de domínio no sistema. Ele atua como um intermediário que recebe eventos de diferentes partes do domínio e os distribui para os assinantes (subscribers) apropriados.
+
+O Publisher é parte fundamental do sistema de eventos de domínio e é responsável por:
+- Receber eventos de entidades e agregados
+- Gerenciar a lista de assinantes para cada tipo de evento
+- Distribuir eventos para os assinantes corretos
+- Garantir que os eventos sejam processados de forma assíncrona e desacoplada
+
+Em sistemas DDD, o Publisher é frequentemente implementado como um singleton ou como parte de um container de injeção de dependência, garantindo que todos os eventos sejam centralizados e gerenciados de forma consistente.
+
+## Subscriber
+
+Subscriber (assinante) é um componente que se inscreve para receber e processar eventos de domínio específicos. Ele implementa a lógica de reação a eventos que ocorrem no sistema.
+
+Um Subscriber é responsável por:
+- Escutar eventos específicos do domínio
+- Processar a lógica de negócio associada ao evento
+- Executar ações secundárias que não fazem parte do fluxo principal
+- Manter o sistema atualizado com mudanças que ocorrem em outros contextos
+
+Por exemplo, em um sistema de fórum, quando uma resposta é criada (evento `AnswerCreated`), um Subscriber pode ser responsável por:
+- Enviar notificações para o autor da pergunta
+- Atualizar contadores de respostas
+- Registrar a atividade para fins de auditoria
+- Disparar outras ações relacionadas
+
+Os Subscribers são essenciais para manter o desacoplamento entre diferentes partes do sistema, permitindo que mudanças em um contexto não afetem diretamente outros contextos, mas ainda assim possam comunicar-se através de eventos.
