@@ -184,6 +184,7 @@ pnpm test:watch
 ## Documentação
 
 - [Glossário DDD](./docs/GLOSSARIO.md) - Conceitos fundamentais do DDD
+- [Functional Error Handling](./docs/FUNCTIONAL_ERROR_HANDLING.md) - Tratamento funcional de erros com Either
 - [Fluxo de Eventos de Domínio](./docs/EVENT_FLOW.md) - Como os eventos funcionam
 - [Fluxo de Dados de Eventos de Domínio](./docs/EVENT_FLOW_DIAGRAM.md) - Diagrama do fluxo
 - [Passos para a criação de um novo componente](./docs/NEW_COMPONENT.md) - Guia de desenvolvimento
