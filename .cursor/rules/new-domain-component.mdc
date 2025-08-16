@@ -1,0 +1,145 @@
+# New Domain Component Creation Workflow
+
+## Overview
+
+This rule defines the complete workflow for creating new domain components in the Clean DDD architecture. Follow this process to ensure consistency and productivity.
+
+## Step 1: Planning and Documentation
+
+### 1.1 Define the Concept
+
+- What is this new component? (Entity, Value Object, Use Case, etc.)
+- What domain does it belong to?
+- What are its relationships with existing components?
+
+### 1.2 Update Documentation
+
+- Add to glossary: `docs/GLOSSARIO.md`
+- Create data flow if needed: `docs/EVENT_FLOW.md`
+- Document business rules and relationships
+- Update domain documentation if necessary
+
+## Step 2: Implementation Order
+
+### 2.1 Value Objects (if needed)
+
+- Create in `src/domain/[domain]/enterprise/value-objects/`
+- Follow naming: `[value-object-name].ts`
+- Include tests: `[value-object-name].spec.ts`
+
+### 2.2 Entities
+
+- Create in `src/domain/[domain]/enterprise/entities/`
+- Follow naming: `[entity-name].entity.ts`
+- Use template: `docs/templates/entity.template.ts`
+- Follow rules: `new-entity.mdc`
+
+### 2.3 Repository Interfaces
+
+- Create in `src/domain/[domain]/application/repositories/`
+- Follow naming: `[entity-name]s.repository.ts`
+- Use template: `docs/templates/repository.template.ts`
+- Follow rules: `new-repository.mdc`
+
+### 2.4 Use Cases
+
+- Create in `src/domain/[domain]/application/use-cases/`
+- Follow naming: `[action]-[entity].use-case.ts`
+- Use template: `docs/templates/use-case.template.ts`
+- Follow rules: `new-use-case.mdc`
+
+### 2.5 Testing Components
+
+- Test Factory: `test/factories/make-[entity].ts`
+- In-Memory Repository: `test/repositories/in-memory-[entity]s.repository.ts`
+- Use Case Tests: `[action]-[entity].use-case.spec.ts`
+- Use templates from `docs/templates/`
+
+## Step 3: Template Creation
+
+### 3.1 Identify Patterns
+
+- Does this component follow a repeatable pattern?
+- Could it be templated for future use?
+
+### 3.2 Create Template
+
+- Add to `docs/templates/[component-type].template.ts`
+- Include comprehensive examples
+- Add documentation comments
+
+### 3.3 Update Template Documentation
+
+- Update `docs/templates/README.md`
+- Add usage examples
+- Document any special considerations
+
+## Step 4: Cursor Rule Creation
+
+### 4.1 Create Specific Rule
+
+- Create `new-[component-type].mdc` in `.cursor/rules/`
+- Include file locations, naming conventions, and structure requirements
+- Reference relevant templates
+
+### 4.2 Update Overview
+
+- Add reference in `clean-ddd-overview.mdc`
+- Update development workflow section
+- Add to related rules section
+
+### 4.3 Test the Rule
+
+- Verify Cursor applies the rule correctly
+- Test with a simple example
+- Refine if necessary
+
+## Example: Creating a "Course" Entity
+
+### Step 1: Documentation
+
+```markdown
+# Course
+A course represents an educational program with a specific curriculum, instructor, and students.
+- Belongs to: Education domain
+- Relationships: Has Instructor, Has Students, Has Lessons
+- Business Rules: Must have title, instructor, and at least one lesson
+```
+
+### Step 2: Implementation
+
+1. Value Objects: `CourseTitle`, `CourseDescription`
+2. Entity: `Course` with relationships
+3. Repository: `CoursesRepository`
+4. Use Cases: `CreateCourse`, `EnrollStudent`, `AddLesson`
+5. Tests: All components with factories and in-memory repos
+
+### Step 3: Template
+
+- Create `course.template.ts` if course-like entities will be common
+
+### Step 4: Rule
+
+- Create `new-course.mdc` with specific course creation rules
+
+## Best Practices
+
+1. **Start with Documentation**: Always understand the concept before coding
+2. **Follow Dependencies**: Implement in the correct order
+3. **Test First**: Write tests as you implement
+4. **Template Everything**: If it's repeatable, template it
+5. **Document Rules**: Make it easy for others (and future you) to follow the same patterns
+6. **Use Cursor Effectively**: Leverage Cursor's AI capabilities to generate code from templates and rules
+7. **Iterate on Rules**: Refine Cursor rules based on what works best for your team
+
+## Related Rules
+
+- [new-entity.mdc](mdc:.cursor/rules/new-entity.mdc)
+- [new-use-case.mdc](mdc:.cursor/rules/new-use-case.mdc)
+- [new-repository.mdc](mdc:.cursor/rules/new-repository.mdc)
+- [testing.mdc](mdc:.cursor/rules/testing.mdc)
+description:
+globs:
+alwaysApply: false
+
+---

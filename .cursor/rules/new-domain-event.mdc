@@ -1,0 +1,158 @@
+# Domain Event Creation Rules
+
+## Overview
+
+Domain events are notifications that something important happened in the domain. They enable loose coupling between different parts of the system and allow for reactive programming patterns.
+
+## File Structure
+
+### Event File
+
+- Create in `src/domain/[domain]/enterprise/events/`
+- Follow naming: `[action]-[entity-name].event.ts`
+- Use template: [domain-event.template.ts](mdc:docs/templates/domain-event.template.ts)
+
+### Subscriber File (if needed)
+
+- Create in `src/domain/[target-domain]/application/subscribers/`
+- Follow naming: `on-[action]-[entity-name].subscriber.ts`
+- Use template: [event-subscriber.template.ts](mdc:docs/templates/event-subscriber.template.ts)
+
+## Event Structure Requirements
+
+- The event should implement the `DomainEvent` interface from `@core/events/domain.events`
+- The event should have a `ocurredAt` property of type `Date`
+- The event should have a constructor that receives the related entity
+- The event should implement `getAggregateId()` method returning the entity's ID
+- The event should be named following the pattern: `[ActionName][EntityName]Event`
+
+## Subscriber Structure Requirements
+
+- The subscriber should implement the `EventHandler` interface
+- The subscriber should have a constructor with dependency injection
+- The subscriber should call `setupSubscriptions()` in the constructor
+- The subscriber should register the event handler in `setupSubscriptions()`
+- The subscriber should have a private method to handle the event
+- The subscriber should be named following the pattern: `On[ActionName][EntityName]Subscriber`
+
+## Template Usage
+
+### Event Template Placeholders
+
+- `[ActionName]` - The action name (PascalCase, e.g., `Created`, `Updated`, `Deleted`)
+- `[EntityName]` - The entity name (PascalCase)
+- `[entity-name]` - The kebab-case version of your entity name
+- `[domain]` - The domain name
+
+### Subscriber Template Placeholders
+
+- `[ActionName]` - The action name (PascalCase)
+- `[EntityName]` - The entity name (PascalCase)
+- `[entity-name]` - The kebab-case version of your entity name
+- `[domain]` - The domain where the event is defined
+- `[target-domain]` - The domain where the subscriber is located
+- `[RepositoryName]` - The repository name (PascalCase)
+- `[repository-name]` - The kebab-case version of repository name
+- `[UseCaseName]` - The use case name (PascalCase)
+- `[use-case-name]` - The kebab-case version of use case name
+
+## Example Structure
+
+### Event Example
+
+```typescript
+export class AnswerCreatedEvent implements DomainEvent {
+  public ocurredAt: Date;
+
+  constructor(public readonly answer: Answer) {
+    this.ocurredAt = new Date();
+  }
+
+  getAggregateId(): UniqueEntityId {
+    return this.answer.id;
+  }
+}
+```
+
+### Subscriber Example
+
+```typescript
+export class OnAnswerCreatedSubscriber implements EventHandler {
+  constructor(
+    private readonly questionsRepository: QuestionsRepository,
+    private readonly sendNotificationUseCase: SendNotificationUseCase,
+  ) {
+    this.setupSubscriptions();
+  }
+
+  setupSubscriptions(): void {
+    DomainEvent.register(this.sendNewAnswerNotification.bind(this), AnswerCreatedEvent.name);
+  }
+
+  private async sendNewAnswerNotification({ answer }: AnswerCreatedEvent): Promise<void> {
+    // Event handling logic
+  }
+}
+```
+
+## Integration with Entities
+
+### Adding Events to Entity Creation
+
+```typescript
+static create(props: EntityProps, id?: UniqueEntityId): Entity {
+  const entity = new Entity(props, id);
+  
+  const isNewEntity = !id;
+  if (isNewEntity) {
+    entity.addDomainEvent(new EntityCreatedEvent(entity));
+  }
+  
+  return entity;
+}
+```
+
+### Adding Events to Entity Updates
+
+```typescript
+updateContent(content: string): void {
+  this.props.content = content;
+  this.touch();
+  this.addDomainEvent(new EntityUpdatedEvent(this));
+}
+```
+
+## Testing Considerations
+
+- Test event creation and properties
+- Test subscriber registration and handling
+- Test event dispatch flow
+- Test error handling in subscribers
+- Use in-memory repositories for testing
+
+## Best Practices
+
+1. **Event Naming**: Use past tense for events (e.g., `Created`, `Updated`, `Deleted`)
+2. **Single Responsibility**: Each event should represent one specific action
+3. **Immutable Data**: Events should contain immutable data
+4. **Proper Timing**: Events should be added during domain operations, not after
+5. **Error Handling**: Subscribers should handle errors gracefully
+6. **Dependency Injection**: Use constructor injection for subscribers
+
+## Related Files
+
+- Ensure the entity exists and extends `AggregateRoot`
+- Ensure the entity has `addDomainEvent()` method available
+- Create corresponding use cases if needed
+- Update domain documentation with event flow
+
+## Related Rules
+
+- [new-entity.mdc](mdc:.cursor/rules/new-entity.mdc) - Entity creation rules
+- [new-use-case.mdc](mdc:.cursor/rules/new-use-case.mdc) - Use case creation rules
+- [new-domain-component.mdc](mdc:.cursor/rules/new-domain-component.mdc) - Complete workflow
+description:
+globs:
+alwaysApply: false
+
+---

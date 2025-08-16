@@ -6,7 +6,11 @@ export abstract class DomainEvent {
   abstract getAggregateId(): UniqueEntityId;
 }
 
-type DomainEventCallback = (event: DomainEvent) => void;
+export abstract class EventHandler {
+  abstract setupSubscriptions(): void;
+}
+
+type DomainEventCallback<T extends DomainEvent = DomainEvent> = (event: T) => void;
 
 const handlersMap: Map<string, DomainEventCallback[]> = new Map();
 const markedAggregates: AggregateRoot<unknown>[] = [];
@@ -27,13 +31,13 @@ export function dispatchEventsForAggregate(id: UniqueEntityId): void {
   }
 }
 
-export function register(callback: DomainEventCallback, eventClassName: string): void {
+export function register<T extends DomainEvent>(callback: DomainEventCallback<T>, eventClassName: string): void {
   const wasEventRegisteredBefore = handlersMap.has(eventClassName);
   if (!wasEventRegisteredBefore) {
     handlersMap.set(eventClassName, []);
   }
 
-  handlersMap.get(eventClassName)?.push(callback);
+  handlersMap.get(eventClassName)?.push(callback as DomainEventCallback);
 }
 
 export function clearHandlers(): void {

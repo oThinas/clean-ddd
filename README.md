@@ -100,6 +100,15 @@ pnpm test
 pnpm test:watch
 ```
 
+## Documentação
+
+- [Glossário](./docs/GLOSSARIO.md)
+- [Fluxo de Eventos de Domínio](./docs/EVENT_FLOW.md)
+- [Fluxo de Dados de Eventos de Domínio](./docs/EVENT_FLOW_DIAGRAM.md)
+- [Passos para a criação de um novo componente](./docs/NEW_COMPONENT.md)
+- [Watched List e Agregados](./docs/WATCHED_LIST_AND_AGGREGATE.md)
+- [Templates](./docs/templates/README.md)
+
 ## Referências
 
 - [The Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) - Artigo original de Robert C. Martin

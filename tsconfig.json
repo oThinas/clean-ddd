@@ -49,6 +49,12 @@
       "@notification/use-cases/*": [
         "./src/domain/notification/application/use-cases/*"
       ],
+      "@forum/events/*": [
+        "./src/domain/forum/enterprise/events/*"
+      ],
+      "@notification/subscribers/*": [
+        "./src/domain/notification/application/subscribers/*"
+      ],
       "@forum/value-objects/*": [
         "./src/domain/forum/enterprise/entities/value-objects/*"
       ],
@@ -58,9 +64,12 @@
       "@test-repositories/*": [
         "./test/repositories/*"
       ],
+      "@test-utils/*": [
+        "./test/utils/*"
+      ],
       "@types/*": [
         "./src/core/types/*"
-      ]
+      ],
     }, /* Specify a set of entries that re-map imports to additional lookup locations. */
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */
